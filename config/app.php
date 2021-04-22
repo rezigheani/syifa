@@ -165,7 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Spatie\Permission\PermissionServiceProvider::class,
+        AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -229,7 +230,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        /*
+         * additional
+         * */
 
+        'Form' => Collective\Html\FormFacde::class,
+        'Html' => Collective\Html\HtmlFacde::class,
     ],
 
 ];

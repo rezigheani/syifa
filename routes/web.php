@@ -17,6 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
+// super-admin
+Route::prefix('super-admin')->middleware(['auth:sanctum', 'verified','role:super-admin'])->group(function () {
+
+    Route::get('users', \App\Http\Livewire\SuperAdmin\Users::class )->name('user.list');
+
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

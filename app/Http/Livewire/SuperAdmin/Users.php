@@ -16,6 +16,8 @@ class Users extends Component
     public $user_id;
     // modal edit
     public $editable = false;
+    // modal add
+    public $add = false;
 
 
     public function __construct($id = null)

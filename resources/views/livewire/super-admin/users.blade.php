@@ -121,6 +121,19 @@
         </x-slot>
     </x-jet-dialog-modal>
     @endif
+    <x-jet-dialog-modal wire:model="add">
+        <x-slot name="title">
+            {{ __('Add User :') }}
+        </x-slot>
+        <x-slot name="content">
+            @livewire('default-component.profile',['user_id'=>$user_id],key('user-profile-'.$user_id))
+        </x-slot>
+
+        <x-slot name="footer">
+
+        </x-slot>
+    </x-jet-dialog-modal>
+
     <style>
         html,
         body {

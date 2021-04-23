@@ -64,4 +64,5 @@ class UserRepository implements UserInterface
         }
 
     }
+
 }

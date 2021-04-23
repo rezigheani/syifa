@@ -8,6 +8,7 @@ use http\Env\Request;
 
 interface UserInterface
 {
+    public function resetPassword(Int $user_id);
     public function remove(Int $user_id);
     public function updateInformation(Int $user_id,Request $request);
 }

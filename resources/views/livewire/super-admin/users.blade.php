@@ -77,7 +77,9 @@
                                                 @livewire('super-admin.change-role',['user_id'=>$item->id],key('edit-role-'.$item->id))
                                             </td>
                                             <td class="border-grey-light border-t-2 h-15 hover:bg-gray-100 p-3 truncate">
-                                                <button wire:click="edit({{$item->id}})">Edit</button>
+                                                <button onclick="confirm('Apakah anda yakin mereset password : {{$item->name}}') && @this.resetPassword({{$item->id}})">Reset Password</button>
+                                                |
+                                                <button wire:click="setUserId({{$item->id}})">Edit</button>
                                                 |
                                                 <button
                                                     onclick="confirm('Apakah anda yakin menghapus: {{$item->name}}') && @this.removeUser({{$item->id}})">
@@ -101,14 +103,24 @@
                         </div>
                     </div>
                     {{--content here--}}
-
                 </div>
             </div>
         </div>
-        <script>
-
-        </script>
     </div>
+    @if($user_id)
+    <x-jet-dialog-modal wire:model="editable">
+        <x-slot name="title">
+            {{ __('Edit User :') }} {{\App\Models\User::find($user_id)->name}}
+        </x-slot>
+        <x-slot name="content">
+                @livewire('default-component.profile',['user_id'=>$user_id],key('user-profile-'.$user_id))
+        </x-slot>
+
+        <x-slot name="footer">
+
+        </x-slot>
+    </x-jet-dialog-modal>
+    @endif
     <style>
         html,
         body {

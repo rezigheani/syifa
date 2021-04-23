@@ -4,13 +4,14 @@ namespace App\Http\Livewire\DefaultComponent;
 
 use App\Models\District;
 use App\Models\Regency;
+use App\Models\User;
 use App\Models\Village;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Profile extends Component
 {
-    public $user_id = 0;
+    public $user_id;
 
     public $nik;
     public $alamat;
@@ -61,7 +62,7 @@ class Profile extends Component
     }
     public function mount()
     {
-        $user = $this->user_id  ? user_id : Auth::user();
+        $user = $this->user_id  ? User::find($this->user_id) : Auth::user();
         $profile = \App\Models\Profile::where('user_id', $this->user_id  ? $this->user_id : Auth::user()->id)->first();
         $this->name = $user->name;
 

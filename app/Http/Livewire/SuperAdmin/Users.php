@@ -13,10 +13,23 @@ class Users extends Component
 
     public $role;
     public $name;
+    public $user_id;
+    // modal edit
+    public $editable = false;
+
 
     public function __construct($id = null)
     {
         parent::__construct($id);
+    }
+
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+        $this->editable = !$this->editable;
+        if (!$this->editable) {
+            $this->redirect('#');
+        }
     }
 
     public function render()
@@ -33,6 +46,16 @@ class Users extends Component
         $this->user = $user;
     }
 
+    public function resetPassword(UserRepository $user, $user_id)
+    {
+        if (($isReset = $user->resetPassword($user_id))){
+            $this->emit('alert', ['tipe' => 'success', 'body' => 'User : <b>' . $isReset->name . '</b> berhasil tereset <br> Password:'.$user->defaultPassword]);
+        }else{
+            $this->emit('alert', ['tipe' => 'warning', 'body' => 'User tidak ditemukan.']);
+        }
+
+    }
+
     public function removeUser(UserRepository $user, $user_id)
     {
         $isDeleted = $user->remove($user_id);
@@ -40,8 +63,6 @@ class Users extends Component
             $this->emit('alert', ['tipe' => 'success', 'body' => 'User : <b>' . $isDeleted->name . '</b> berhasil terhapus']);
         } else {
             $this->emit('alert', ['tipe' => 'warning', 'body' => 'User tidak ditemukan.']);
-
         }
-
     }
 }
